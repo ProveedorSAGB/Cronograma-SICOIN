@@ -601,13 +601,13 @@
                     <strong>Objetivo:</strong> Consolidar las bases de datos históricas del SICOIN (PTAR y PTCI vs PTAR_DESGLOSADO y PTCI_DESGLOSADO) mediante resectorización, cruce de riesgos y consolidación de acciones de control y mejora, conforme a las disposiciones de la Ley General del Sistema Nacional Anticorrupción.
                 </div>
                 <div class="tasks-grid">
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 1, 0)"><span class="task-title">Resectorización de Bases PTAR y PTCI</span></div><div class="task-description">Reorganización sectorial de las bases principales</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 1, 1)"><span class="task-title">Resectorización PTAR_DESGLOSADO</span></div><div class="task-description">Aplicación de criterios de resectorización a base desglosada</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 1, 2)"><span class="task-title">Cruce de Riesgos en PTAR</span></div><div class="task-description">Identificación y mapeo de riesgos entre bases</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 1, 3)"><span class="task-title">Consolidación Acciones de Control</span></div><div class="task-description">Unificación de acciones PTAR y PTAR_DESGLOSADO</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 1, 4)"><span class="task-title">Consolidación Acciones de Mejora PTCI</span></div><div class="task-description">Armonización de acciones de mejora continua</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 1, 5)"><span class="task-title">Actualización SICOIN Dashboard</span></div><div class="task-description">Migración de datos consolidados al sistema de visualización</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 1, 6)"><span class="task-title">Informe de Depuración</span></div><div class="task-description">Documento técnico con registros a eliminar de la base original</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="0"><span class="task-title">Resectorización de Bases PTAR y PTCI</span></div><div class="task-description">Reorganización sectorial de las bases principales</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="1"><span class="task-title">Resectorización PTAR_DESGLOSADO</span></div><div class="task-description">Aplicación de criterios de resectorización a base desglosada</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="2"><span class="task-title">Cruce de Riesgos en PTAR</span></div><div class="task-description">Identificación y mapeo de riesgos entre bases</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="3"><span class="task-title">Consolidación Acciones de Control</span></div><div class="task-description">Unificación de acciones PTAR y PTAR_DESGLOSADO</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="4"><span class="task-title">Consolidación Acciones de Mejora PTCI</span></div><div class="task-description">Armonización de acciones de mejora continua</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="5"><span class="task-title">Actualización SICOIN Dashboard</span></div><div class="task-description">Migración de datos consolidados al sistema de visualización</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="6"><span class="task-title">Informe de Depuración</span></div><div class="task-description">Documento técnico con registros a eliminar de la base original</div></div>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
                 <div class="timeline">
@@ -618,9 +618,9 @@
                     <div class="timeline-item"><div class="timeline-date">Día 9-10</div><div class="timeline-label">Informe</div></div>
                 </div>
                 <div class="update-buttons">
-                    <button class="btn btn-primary" onclick="updateProgress(1, 10)">+10% Avance</button>
-                    <button class="btn btn-secondary" onclick="updateProgress(1, 25)">+25% Avance</button>
-                    <button class="btn btn-tertiary" onclick="addComment(1)">Añadir Comentario</button>
+                    <button class="btn btn-primary" data-activity-id="1" data-amount="10">+10% Avance</button>
+                    <button class="btn btn-secondary" data-activity-id="1" data-amount="25">+25% Avance</button>
+                    <button class="btn btn-tertiary" data-activity-id="1" data-action="comment">Añadir Comentario</button>
                 </div>
             </div>
             <!-- Actividad 2 -->
@@ -633,18 +633,18 @@
                     <strong>Objetivo:</strong> Realizar un análisis exhaustivo del SICOIN para identificar variables críticas, proponer nuevos reportes, optimizar visualizaciones de datos y establecer criterios de normalización institucional conforme a las Disposiciones Generales de Control Interno.
                 </div>
                 <div class="tasks-grid">
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 2, 0)"><span class="task-title">Análisis de Variables Críticas</span></div><div class="task-description">Identificación de variables que generan oportunidades de análisis</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 2, 1)"><span class="task-title">Propuesta de Nuevos Reportes</span></div><div class="task-description">Diseño de reportes con variables adicionales no contempladas</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 2, 2)"><span class="task-title">Optimización de Visualizaciones</span></div><div class="task-description">Mejora de cuadros de mando y dashboards existentes</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 2, 3)"><span class="task-title">Depuración de Módulos</span></div><div class="task-description">Identificación y retiro de secciones obsoletas</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 2, 4)"><span class="task-title">Investigación Normativa</span></div><div class="task-description">Requisitos legales para normalización del SICOIN</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 2, 5)"><span class="task-title">Propuesta de Normalización</span></div><div class="task-description">Criterios obligatorios para carga institucional de datos</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="0"><span class="task-title">Análisis de Variables Críticas</span></div><div class="task-description">Identificación de variables que generan oportunidades de análisis</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="1"><span class="task-title">Propuesta de Nuevos Reportes</span></div><div class="task-description">Diseño de reportes con variables adicionales no contempladas</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="2"><span class="task-title">Optimización de Visualizaciones</span></div><div class="task-description">Mejora de cuadros de mando y dashboards existentes</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="3"><span class="task-title">Depuración de Módulos</span></div><div class="task-description">Identificación y retiro de secciones obsoletas</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="4"><span class="task-title">Investigación Normativa</span></div><div class="task-description">Requisitos legales para normalización del SICOIN</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="5"><span class="task-title">Propuesta de Normalización</span></div><div class="task-description">Criterios obligatorios para carga institucional de datos</div></div>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
                 <div class="update-buttons">
-                    <button class="btn btn-primary" onclick="updateProgress(2, 10)">+10% Avance</button>
-                    <button class="btn btn-secondary" onclick="updateProgress(2, 25)">+25% Avance</button>
-                    <button class="btn btn-tertiary" onclick="addComment(2)">Añadir Comentario</button>
+                    <button class="btn btn-primary" data-activity-id="2" data-amount="10">+10% Avance</button>
+                    <button class="btn btn-secondary" data-activity-id="2" data-amount="25">+25% Avance</button>
+                    <button class="btn btn-tertiary" data-activity-id="2" data-action="comment">Añadir Comentario</button>
                 </div>
             </div>
             <!-- Actividad 3 -->
@@ -657,17 +657,17 @@
                     <strong>Objetivo:</strong> Consolidar y optimizar la gestión de claves de usuario del SICOIN, incluyendo la baja de claves inválidas y la implementación de controles de acceso mejorados, en cumplimiento con las disposiciones de seguridad informática institucional.
                 </div>
                 <div class="tasks-grid">
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 3, 0)"><span class="task-title">Auditoría de Claves Activas</span></div><div class="task-description">Revisión integral de usuarios con acceso vigente</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 3, 1)"><span class="task-title">Identificación de Claves Inválidas</span></div><div class="task-description">Detección de usuarios inactivos o con permisos obsoletos</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 3, 2)"><span class="task-title">Proceso de Baja de Usuarios</span></div><div class="task-description">Eliminación controlada de accesos no válidos</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 3, 3)"><span class="task-title">Consolidación de Perfiles</span></div><div class="task-description">Unificación y optimización de roles de usuario</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" onchange="updateTask(this, 3, 4)"><span class="task-title">Implementación de Controles</span></div><div class="task-description">Nuevos mecanismos de seguridad y validación</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="0"><span class="task-title">Auditoría de Claves Activas</span></div><div class="task-description">Revisión integral de usuarios con acceso vigente</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="1"><span class="task-title">Identificación de Claves Inválidas</span></div><div class="task-description">Detección de usuarios inactivos o con permisos obsoletos</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="2"><span class="task-title">Proceso de Baja de Usuarios</span></div><div class="task-description">Eliminación controlada de accesos no válidos</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="3"><span class="task-title">Consolidación de Perfiles</span></div><div class="task-description">Unificación y optimización de roles de usuario</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="4"><span class="task-title">Implementación de Controles</span></div><div class="task-description">Nuevos mecanismos de seguridad y validación</div></div>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
                 <div class="update-buttons">
-                    <button class="btn btn-primary" onclick="updateProgress(3, 10)">+10% Avance</button>
-                    <button class="btn btn-secondary" onclick="updateProgress(3, 25)">+25% Avance</button>
-                    <button class="btn btn-tertiary" onclick="addComment(3)">Añadir Comentario</button>
+                    <button class="btn btn-primary" data-activity-id="3" data-amount="10">+10% Avance</button>
+                    <button class="btn btn-secondary" data-activity-id="3" data-amount="25">+25% Avance</button>
+                    <button class="btn btn-tertiary" data-activity-id="3" data-action="comment">Añadir Comentario</button>
                 </div>
             </div>
         </div>
@@ -686,6 +686,14 @@
       // La configuración de Firebase se obtiene del entorno de Canvas.
       // Se utiliza un objeto vacío como fallback si __firebase_config no está definido.
       const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+
+      // Validar que la configuración de Firebase tenga una API Key
+      if (!firebaseConfig || !firebaseConfig.apiKey) {
+          console.error("Firebase Error: La clave API no está definida en la configuración de Firebase. Asegúrate de que __firebase_config esté correctamente configurado en el entorno de Canvas.");
+          mostrarNotificacion("Error: Clave API de Firebase no encontrada. Consulta la consola.", "error");
+          // Detener la ejecución si no hay una clave API válida para evitar errores.
+          throw new Error("Firebase API Key is missing.");
+      }
 
       // Inicializamos la aplicación de Firebase.
       const app = initializeApp(firebaseConfig);
@@ -834,7 +842,7 @@
        * @param {number} activityId - El ID de la actividad (1, 2, o 3).
        * @param {number} taskId - El índice de la tarea (empezando en 0).
        */
-      window.updateTask = function(checkbox, activityId, taskId) {
+      function updateTask(checkbox, activityId, taskId) {
           // Actualizamos el estado de la tarea en nuestro objeto local.
           cronogramaState.actividades[activityId].tareas[taskId] = checkbox.checked;
           
@@ -854,7 +862,7 @@
        * @param {number} activityId - El ID de la actividad.
        * @param {number} amount - La cantidad de progreso a añadir.
        */
-      window.updateProgress = function(activityId, amount) {
+      function updateProgress(activityId, amount) {
           let progresoActual = cronogramaState.actividades[activityId].progreso;
           progresoActual += amount;
           if (progresoActual > 100) progresoActual = 100; // No pasar del 100%
@@ -881,11 +889,39 @@
       }
 
       // Funciones placeholder que no interactúan con Firebase pero evitan errores.
-      window.addComment = function(activityId) {
+      function addComment(activityId) {
           // En lugar de alert(), se podría implementar un modal personalizado.
           mostrarNotificacion(`Función de comentario para Actividad ${activityId} no implementada.`, "info");
       }
 
+      // --- 5. ADICIÓN DE LISTENERS DE EVENTOS DESPUÉS DE CARGAR EL DOM ---
+      document.addEventListener('DOMContentLoaded', () => {
+          // Adjuntar listeners para los checkboxes de tareas
+          document.querySelectorAll('.task-checkbox input[type="checkbox"]').forEach(checkbox => {
+              checkbox.addEventListener('change', (event) => {
+                  const activityId = event.target.dataset.activityId;
+                  const taskId = parseInt(event.target.dataset.taskId);
+                  updateTask(event.target, activityId, taskId);
+              });
+          });
+
+          // Adjuntar listeners para los botones de avances
+          document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+              button.addEventListener('click', (event) => {
+                  const activityId = event.target.dataset.activityId;
+                  const amount = parseInt(event.target.dataset.amount);
+                  updateProgress(activityId, amount);
+              });
+          });
+
+          // Adjuntar listeners para los botones de comentariossss
+          document.querySelectorAll('.btn-tertiary').forEach(button => {
+              button.addEventListener('click', (event) => {
+                  const activityId = event.target.dataset.activityId;
+                  addComment(activityId);
+              });
+          });
+      });
     </script>
 </body>
 </html>
