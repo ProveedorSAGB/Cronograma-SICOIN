@@ -680,19 +680,29 @@
       // --- 1. INICIALIZACIÓN DE FIREBASE ---
       // Importamos las funciones necesarias de los SDK de Firebase.
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-      import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-      import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+      import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+      import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-      // La configuración de Firebase se obtiene del entorno de Canvas.
-      // Se utiliza un objeto vacío como fallback si __firebase_config no está definido.
-      const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+      // --- CONFIGURACIÓN DE FIREBASE ---
+      // Esta es la configuración de tu proyecto de Firebase.
+      const firebaseConfig = {
+        apiKey: "AIzaSyAPKvpV6pf8twwIwSSKzoQSgi4X1MRQpjc",
+        authDomain: "cronograma-sicoin-11bc5.firebaseapp.com",
+        projectId: "cronograma-sicoin-11bc5",
+        storageBucket: "cronograma-sicoin-11bc5.firebasestorage.app",
+        messagingSenderId: "753321413341",
+        appId: "1:753321413341:web:6cbcabcb9345f6c4f02934"
+      };
+
+      // Define un ID único para tu aplicación basado en el projectId de Firebase.
+      const appId = firebaseConfig.projectId;
+      console.log("App ID utilizada para Firestore:", appId); // Para depuración
 
       // Validar que la configuración de Firebase tenga una API Key
       if (!firebaseConfig || !firebaseConfig.apiKey) {
-          console.error("Firebase Error: La clave API no está definida en la configuración de Firebase. Asegúrate de que __firebase_config esté correctamente configurado en el entorno de Canvas.");
-          mostrarNotificacion("Error: Clave API de Firebase no encontrada. Consulta la consola.", "error");
-          // Detener la ejecución si no hay una clave API válida para evitar errores.
-          throw new Error("Firebase API Key is missing.");
+          console.error("Firebase Error: La clave API no está definida en la configuración de Firebase.");
+          mostrarNotificacion("Error: Clave API de Firebase no configurada. Consulta la consola.", "error");
+          // No lanzamos un error que detenga la ejecución, solo mostramos una notificación.
       }
 
       // Inicializamos la aplicación de Firebase.
@@ -701,13 +711,9 @@
       const auth = getAuth(app);
       const db = getFirestore(app);
 
-      // Obtenemos el ID de la aplicación del entorno de Canvas.
-      // Se utiliza 'default-app-id' como fallback si __app_id no está definido.
-      const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
       // --- 2. ESTADO GLOBAL Y REFERENCIA A FIRESTORE ---
       // Referencia al documento único que almacenará todo el estado del cronograma.
-      // La ruta sigue la estructura para datos públicos en Canvas:
+      // La ruta sigue la estructura para datos públicos:
       // /artifacts/{appId}/public/data/{nombre_coleccion}/{nombre_documento}
       const progressDocRef = doc(db, "artifacts", appId, "public", "data", "Avance", "estadoCronograma");
 
@@ -752,19 +758,13 @@
           });
 
         } else {
-          // Si no hay usuario, intentamos iniciar sesión con el token personalizado
-          // proporcionado por el entorno de Canvas, o de forma anónima si no está disponible.
-          console.log("Intentando iniciar sesión...");
+          // Si no hay usuario, intentamos iniciar sesión anónimamente.
+          console.log("Intentando iniciar sesión anónimamente...");
           try {
-              if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                  await signInWithCustomToken(auth, __initial_auth_token);
-                  console.log("Sesión iniciada con token personalizado.");
-              } else {
-                  await signInAnonymously(auth);
-                  console.log("Sesión iniciada anónimamente.");
-              }
+              await signInAnonymously(auth);
+              console.log("Sesión iniciada anónimamente.");
           } catch (error) {
-              console.error("Error en el inicio de sesión:", error);
+              console.error("Error en el inicio de sesión anónima:", error);
               mostrarNotificacion(`Error de autenticación: ${error.message}`, "error");
           }
         }
@@ -905,7 +905,7 @@
               });
           });
 
-          // Adjuntar listeners para los botones de avances
+          // Adjuntar listeners para los botones de avance
           document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
               button.addEventListener('click', (event) => {
                   const activityId = event.target.dataset.activityId;
@@ -914,7 +914,7 @@
               });
           });
 
-          // Adjuntar listeners para los botones de comentariossss
+          // Adjuntar listeners para los botones de comentario
           document.querySelectorAll('.btn-tertiary').forEach(button => {
               button.addEventListener('click', (event) => {
                   const activityId = event.target.dataset.activityId;
