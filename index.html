@@ -142,6 +142,8 @@
         .progress-ring .progress-1 { stroke: var(--primary-dark); }
         .progress-ring .progress-2 { stroke: var(--primary-green); }
         .progress-ring .progress-3 { stroke: var(--primary-gold); }
+        .progress-ring .progress-4 { stroke: var(--primary-dark-light); } /* New color for Actividad 4 */
+
 
         .progress-text {
             position: absolute;
@@ -189,6 +191,11 @@
             animation-delay: 0.4s;
         }
 
+        .activity-card:nth-child(4) { /* New style for Actividad 4 */
+            border-left-color: var(--primary-dark-light);
+            animation-delay: 0.6s;
+        }
+
         .activity-header {
             display: flex;
             justify-content: space-between;
@@ -213,10 +220,29 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+        
+        .status-select {
+            padding: 8px 15px;
+            border-radius: 25px;
+            border: 1px solid var(--primary-dark);
+            background-color: white;
+            font-weight: bold;
+            color: var(--primary-dark);
+            cursor: pointer;
+            appearance: none; /* Remove default select arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23621333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+        }
 
         .status-iniciado { background: var(--primary-gold); }
         .status-pendiente { background: var(--primary-green); }
         .status-planificado { background: var(--primary-dark); }
+        .status-completado { background: #28a745; } /* Green for completed */
+
 
         .activity-description {
             color: var(--text-dark);
@@ -375,11 +401,16 @@
             border-bottom: none;
         }
 
-        .update-buttons {
+        .activity-buttons { /* Renamed from update-buttons for clarity */
             display: flex;
             gap: 10px;
             margin-top: 15px;
             flex-wrap: wrap;
+            justify-content: flex-end; /* Align buttons to the right */
+        }
+
+        .task-buttons { /* New class for task-level buttons */
+            display: none; /* Hide task-level buttons */
         }
 
         .btn {
@@ -537,24 +568,139 @@
         .notification.error {
             background: #dc3545; /* Red color for errors */
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1002; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content h3 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        .modal-content textarea {
+            width: calc(100% - 20px);
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        .modal-content input[type="password"],
+        .modal-content input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .modal-content .btn {
+            margin: 5px;
+        }
+
+        .comments-section {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            text-align: left;
+        }
+
+        .comments-section h4 {
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .comment-item {
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
+        }
+
+        .comment-item strong {
+            color: var(--primary-dark);
+        }
+
+        .file-list {
+            text-align: left;
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .file-list a {
+            display: block;
+            padding: 8px 0;
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .file-list a:hover {
+            color: var(--primary-green);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- El resto del HTML se mantiene igual -->
         <div class="header">
             <h1>🏛️ SICOIN - Sistema de Control Interno</h1>
             <p>Cronograma de Actividades de Consolidación de Bases de Datos</p>
             <p style="margin-top: 10px; font-size: 1em; color: var(--primary-gold);">
                 Dirigido a: <strong>Lic. Guisel Alexandra Donato</strong><br>
-                Jefe(a) de Departamento de Prevención de la Corrupción
+                Proveedor: <strong>SAGB José Cruz Gómez número de contrato DC-625-2025</strong>
             </p>
         </div>
 
         <div class="progress-overview">
             <!-- Actividad 1 -->
             <div class="progress-card" data-activity-id="1">
-                <h3>Actividad 1: Consolidación de Bases</h3>
+                <h3>Actividad 1: Consolidación de Datos Históricos</h3>
                 <div class="progress-ring">
                     <svg>
                         <circle class="bg" cx="56" cy="56" r="52"></circle>
@@ -562,11 +708,11 @@
                     </svg>
                     <div class="progress-text">0%</div>
                 </div>
-                <p>PTAR/PTCI vs PTAR_DESGLOSADO/PTCI_DESGLOSADO</p>
+                <p>Perfilamiento y Consolidación de Datos Históricos</p>
             </div>
             <!-- Actividad 2 -->
             <div class="progress-card" data-activity-id="2">
-                <h3>Actividad 2: Análisis y Mejoras</h3>
+                <h3>Actividad 2: Análisis Integral y Mejoras</h3>
                 <div class="progress-ring">
                     <svg>
                         <circle class="bg" cx="56" cy="56" r="52"></circle>
@@ -574,11 +720,11 @@
                     </svg>
                     <div class="progress-text">0%</div>
                 </div>
-                <p>Revisión integral y propuestas de mejora</p>
+                <p>Análisis Integral del SICOIN y Propuesta de Mejoras</p>
             </div>
             <!-- Actividad 3 -->
             <div class="progress-card" data-activity-id="3">
-                <h3>Actividad 3: Gestión de Usuarios</h3>
+                <h3>Actividad 3: Propuesta de Reportes Nuevos</h3>
                 <div class="progress-ring">
                     <svg>
                         <circle class="bg" cx="56" cy="56" r="52"></circle>
@@ -586,7 +732,19 @@
                     </svg>
                     <div class="progress-text">0%</div>
                 </div>
-                <p>Consolidación y limpieza de claves de usuario</p>
+                <p>Diseño de Nuevos Reportes para el SICOIN</p>
+            </div>
+            <!-- Actividad 4 -->
+            <div class="progress-card" data-activity-id="4">
+                <h3>Actividad 4: Gestión de Claves de Usuario</h3>
+                <div class="progress-ring">
+                    <svg>
+                        <circle class="bg" cx="56" cy="56" r="52"></circle>
+                        <circle class="progress progress-4" cx="56" cy="56" r="52" stroke-dasharray="327" stroke-dashoffset="327"></circle>
+                    </svg>
+                    <div class="progress-text">0%</div>
+                </div>
+                <p>Consolidación y Optimización de Claves de Usuario</p>
             </div>
         </div>
 
@@ -594,80 +752,158 @@
              <!-- Actividad 1 -->
             <div class="activity-card" data-activity-id="1">
                 <div class="activity-header">
-                    <h2 class="activity-title">📊 Actividad 1: Consolidación de Bases de Datos Históricas</h2>
-                    <span class="activity-status status-iniciado">Iniciado</span>
+                    <h2 class="activity-title">📊 Actividad 1: Perfilamiento y Consolidación de los Datos Históricos de Control Interno</h2>
+                    <select class="status-select" data-activity-id="1">
+                        <option value="Planificado">Planificado</option>
+                        <option value="Iniciado">Iniciado</option>
+                        <option value="Completado">Completado</option>
+                    </select>
                 </div>
                 <div class="activity-description">
-                    <strong>Objetivo:</strong> Consolidar las bases de datos históricas del SICOIN (PTAR y PTCI vs PTAR_DESGLOSADO y PTCI_DESGLOSADO) mediante resectorización, cruce de riesgos y consolidación de acciones de control y mejora, conforme a las disposiciones de la Ley General del Sistema Nacional Anticorrupción.
+                    <strong>Objetivo:</strong> Recopilar, perfilar y consolidar la información histórica derivada de la implementación y evaluación del Sistema de Control Interno (SCI) en cada una de las entidades que conforman la APF, correspondiente a los ejercicios fiscales de 2014 a 2017, registrada en el SICOIN y disponible a través de los reportes del Programa de Trabajo de Administración de Riesgos (PTAR) y del Programa de Trabajo de Control Interno (PTCI).
                 </div>
                 <div class="tasks-grid">
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="0"><span class="task-title">Resectorización de Bases PTAR y PTCI</span></div><div class="task-description">Reorganización sectorial de las bases principales</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="1"><span class="task-title">Resectorización PTAR_DESGLOSADO</span></div><div class="task-description">Aplicación de criterios de resectorización a base desglosada</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="2"><span class="task-title">Cruce de Riesgos en PTAR</span></div><div class="task-description">Identificación y mapeo de riesgos entre bases</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="3"><span class="task-title">Consolidación Acciones de Control</span></div><div class="task-description">Unificación de acciones PTAR y PTAR_DESGLOSADO</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="4"><span class="task-title">Consolidación Acciones de Mejora PTCI</span></div><div class="task-description">Armonización de acciones de mejora continua</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="5"><span class="task-title">Actualización SICOIN Dashboard</span></div><div class="task-description">Migración de datos consolidados al sistema de visualización</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="6"><span class="task-title">Informe de Depuración</span></div><div class="task-description">Documento técnico con registros a eliminar de la base original</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="0"><span class="task-title">Tarea 0: Recopilar e integrar la información en una base de datos principal denominada “Histórico PTCI y PTAR 2017–2024”.</span></div><div class="task-description">Se recopilará e integrará la información disponible mediante los reportes del SICOIN (PTCI, PTAR, PTCI_Desglosado y PTAR_Desglosado), concentrándola en un solo archivo que servirá como base de datos fundamental para el análisis histórico.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="1"><span class="task-title">Tarea 1: Perfilamiento de la base de datos y resectorización conforme al PEF.</span></div><div class="task-description">Se realizará un diagnóstico inicial del estado de los datos consolidados. Como parte del perfilamiento, también se actualizarán los nombres oficiales de las instituciones y se asignará a cada una el sector correspondiente conforme al Presupuesto de Egresos de la Federación (PEF) del ejercicio más reciente.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="2"><span class="task-title">Tarea 2: Depuración y consolidación técnica de la base de datos final.</span></div><div class="task-description">Se llevará a cabo una limpieza profunda de la base de datos perfilada, eliminando registros duplicados, inconsistencias, datos incompletos o irrelevantes (registros basura) y cualquier otro elemento que afecte la calidad del conjunto. Posteriormente, se consolidará la base de datos depurada para dejarla en condiciones óptimas para análisis e interpretación.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="3"><span class="task-title">Tarea 3: Obtención de cifras históricas globales inamovibles.</span></div><div class="task-description">A partir de la base de datos depurada y consolidada, se obtendrán las cifras históricas globales correspondientes a las acciones de control, acciones de mejora, riesgos identificados y factores de riesgo, junto con su estatus respectivo (atendido, en proceso, no atendido, etc.). Estas cifras servirán como indicadores inamovibles de referencia institucional, permitiendo la generación de reportes comparativos, análisis de evolución del SCI y construcción de tableros de seguimiento confiables.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="1" data-task-id="4"><span class="task-title">Tarea 4: Realizar Informe Técnico de Resultados.</span></div><div class="task-description">Se elaborará un informe técnico final dirigido al área de Sistemas, en el que se detallarán los resultados del proceso de depuración, perfilamiento y consolidación de la base de datos histórica del SCI. El informe incluirá una relación precisa de los registros que deberán eliminarse o corregirse en la base original del sistema, con el objetivo de asegurar la integridad, consistencia y actualización de la información contenida en SICOIN.</div>
+                    </div>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
                 <div class="timeline">
-                    <div class="timeline-item"><div class="timeline-date">Día 1-2</div><div class="timeline-label">Resectorización</div></div>
-                    <div class="timeline-item"><div class="timeline-date">Día 3-4</div><div class="timeline-label">Cruce de Riesgos</div></div>
-                    <div class="timeline-item"><div class="timeline-date">Día 5-6</div><div class="timeline-label">Consolidación</div></div>
-                    <div class="timeline-item"><div class="timeline-date">Día 7-8</div><div class="timeline-label">Dashboard</div></div>
-                    <div class="timeline-item"><div class="timeline-date">Día 9-10</div><div class="timeline-label">Informe</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 1-2</div><div class="timeline-label">Recopilar e Integrar Base de Datos</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 3-5</div><div class="timeline-label">Perfilamiento y Resectorización</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 6-12</div><div class="timeline-label">Depuración y Consolidación</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 13-14</div><div class="timeline-label">Obtención de Cifras Históricas</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 15-16</div><div class="timeline-label">Informe Técnico de Resultados</div></div>
+                    <div class="timeline-item"><div class="timeline-date">10 Julio 2025</div><div class="timeline-label">Entrega Final</div></div>
                 </div>
-                <div class="update-buttons">
-                    <button class="btn btn-primary" data-activity-id="1" data-amount="10">+10% Avance</button>
-                    <button class="btn btn-secondary" data-activity-id="1" data-amount="25">+25% Avance</button>
-                    <button class="btn btn-tertiary" data-activity-id="1" data-action="comment">Añadir Comentario</button>
+                <div class="activity-buttons">
+                    <button class="btn btn-primary" onclick="uploadFilePrompt(1)">Cargar Archivo</button>
+                    <button class="btn btn-secondary" onclick="downloadFile(1)">Descargar Avance</button>
+                    <button class="btn btn-tertiary" data-activity-id="1" onclick="addComment(1)">Añadir Comentario</button>
                 </div>
             </div>
             <!-- Actividad 2 -->
             <div class="activity-card" data-activity-id="2">
                 <div class="activity-header">
-                    <h2 class="activity-title">🔍 Actividad 2: Análisis Integral y Propuestas de Mejora</h2>
-                    <span class="activity-status status-pendiente">Pendiente</span>
+                    <h2 class="activity-title">🔍 Actividad 2: Análisis Integral del SICOIN y Propuesta de Mejoras</h2>
+                    <select class="status-select" data-activity-id="2">
+                        <option value="Planificado">Planificado</option>
+                        <option value="Iniciado">Iniciado</option>
+                        <option value="Completado">Completado</option>
+                    </select>
                 </div>
                 <div class="activity-description">
-                    <strong>Objetivo:</strong> Realizar un análisis exhaustivo del SICOIN para identificar variables críticas, proponer nuevos reportes, optimizar visualizaciones de datos y establecer criterios de normalización institucional conforme a las Disposiciones Generales de Control Interno.
+                    <strong>Objetivo:</strong> Realizar un análisis exhaustivo del sistema SICOIN para identificar variables críticas, proponer nuevos reportes, optimizar visualizaciones de datos y establecer criterios de normalización institucional conforme a las Disposiciones Generales de Control Interno.
                 </div>
                 <div class="tasks-grid">
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="0"><span class="task-title">Análisis de Variables Críticas</span></div><div class="task-description">Identificación de variables que generan oportunidades de análisis</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="1"><span class="task-title">Propuesta de Nuevos Reportes</span></div><div class="task-description">Diseño de reportes con variables adicionales no contempladas</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="2"><span class="task-title">Optimización de Visualizaciones</span></div><div class="task-description">Mejora de cuadros de mando y dashboards existentes</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="3"><span class="task-title">Depuración de Módulos</span></div><div class="task-description">Identificación y retiro de secciones obsoletas</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="4"><span class="task-title">Investigación Normativa</span></div><div class="task-description">Requisitos legales para normalización del SICOIN</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="5"><span class="task-title">Propuesta de Normalización</span></div><div class="task-description">Criterios obligatorios para carga institucional de datos</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="0"><span class="task-title">Tarea 0: Identificación de variables críticas del sistema.</span></div><div class="task-description">Se llevará a cabo una revisión integral de las bases de datos y reportes del sistema SICOIN con el objetivo de identificar variables clave para el análisis institucional, tales como los riesgos, acciones de control, acciones de mejora y factores de riesgo. Este análisis permitirá detectar oportunidades de mejora en la estructura de información del sistema y sentará las bases para la redefinición de reportes y dashboards.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="1"><span class="task-title">Tarea 1: Propuesta de rediseño y ampliación de reportes institucionales.</span></div><div class="task-description">Se desarrollará una propuesta técnica para rediseñar los reportes existentes del sistema SICOIN, incorporando variables adicionales que actualmente no están consideradas y cuya inclusión facilitaría el análisis estratégico de control interno y administración de riesgos. Los nuevos reportes estarán alineados con las necesidades operativas de los usuarios y con las mejores prácticas de gestión pública.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="2"><span class="task-title">Tarea 2: Optimización de visualización de módulos y dashboards.</span></div><div class="task-description">Se elaborará una propuesta de mejora visual para los módulos del sistema, incluyendo pestañas, secciones, cuadros de mando y dashboards. Se buscará mejorar la experiencia del usuario mediante una organización más clara de la información, una jerarquía visual más eficiente y una mayor facilidad de navegación entre reportes.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="3"><span class="task-title">Tarea 3: Depuración y actualización de módulos obsoletos.</span></div><div class="task-description">Se realizará una revisión técnica para identificar secciones, funcionalidades o módulos que hayan quedado en desuso, sean redundantes o hayan perdido vigencia normativa. A partir de este análisis, se propondrá su eliminación o reestructuración, con el fin de simplificar el sistema y mantenerlo alineado con las funciones actuales del SCI.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="2" data-task-id="4"><span class="task-title">Tarea 4: Elaboración de la Propuesta Final de Actualización del SICOIN.</span></div><div class="task-description">Se integrará un análisis técnico final que consolide los hallazgos, mejoras propuestas y observaciones derivadas de las tareas anteriores. Este documento incluirá una revisión estructurada por módulo del sistema y por tipo de reporte, detallando para cada uno: el diagnóstico actual, las áreas de mejora identificadas, las sugerencias específicas de rediseño o depuración, y las recomendaciones normativas aplicables. La propuesta se presentará en un archivo final denominado “Propuesta de Actualización y Mejora del Sistema SICOIN”, el cual servirá como insumo técnico para la toma de decisiones en el rediseño funcional del sistema.</div>
+                    </div>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                <div class="update-buttons">
-                    <button class="btn btn-primary" data-activity-id="2" data-amount="10">+10% Avance</button>
-                    <button class="btn btn-secondary" data-activity-id="2" data-amount="25">+25% Avance</button>
-                    <button class="btn btn-tertiary" data-activity-id="2" data-action="comment">Añadir Comentario</button>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-date">Día 1</div><div class="timeline-label">Identificación de Variables Críticas</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 2</div><div class="timeline-label">Propuesta de Nuevos Reportes</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 3</div><div class="timeline-label">Optimización de Visualizaciones y Depuración de Módulos</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 4</div><div class="timeline-label">Propuesta de normalización e Informe final</div></div>
+                    <div class="timeline-item"><div class="timeline-date">15 Julio 2025</div><div class="timeline-label">Entrega Final</div></div>
+                </div>
+                <div class="activity-buttons">
+                    <button class="btn btn-primary" onclick="uploadFilePrompt(2)">Cargar Archivo</button>
+                    <button class="btn btn-secondary" onclick="downloadFile(2)">Descargar Avance</button>
+                    <button class="btn btn-tertiary" data-activity-id="2" onclick="addComment(2)">Añadir Comentario</button>
                 </div>
             </div>
             <!-- Actividad 3 -->
             <div class="activity-card" data-activity-id="3">
                 <div class="activity-header">
-                    <h2 class="activity-title">👥 Actividad 3: Gestión y Consolidación de Usuarios</h2>
-                    <span class="activity-status status-planificado">Planificado</span>
+                    <h2 class="activity-title">👥 Actividad 3: Propuesta de Reportes Nuevos para el SICOIN</h2>
+                    <select class="status-select" data-activity-id="3">
+                        <option value="Planificado">Planificado</option>
+                        <option value="Iniciado">Iniciado</option>
+                        <option value="Completado">Completado</option>
+                    </select>
                 </div>
                 <div class="activity-description">
-                    <strong>Objetivo:</strong> Consolidar y optimizar la gestión de claves de usuario del SICOIN, incluyendo la baja de claves inválidas y la implementación de controles de acceso mejorados, en cumplimiento con las disposiciones de seguridad informática institucional.
+                    <strong>Objetivo:</strong> Diseñar una propuesta integral de nuevos reportes institucionales a partir de la base de datos consolidada en la Actividad 1, mediante una aplicación auxiliar denominada SICOIN Dashboard, que servirá como entorno de visualización y validación para los reportes que se propondrán para su futura implementación dentro del sistema SICOIN.
                 </div>
                 <div class="tasks-grid">
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="0"><span class="task-title">Auditoría de Claves Activas</span></div><div class="task-description">Revisión integral de usuarios con acceso vigente</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="1"><span class="task-title">Identificación de Claves Inválidas</span></div><div class="task-description">Detección de usuarios inactivos o con permisos obsoletos</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="2"><span class="task-title">Proceso de Baja de Usuarios</span></div><div class="task-description">Eliminación controlada de accesos no válidos</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="3"><span class="task-title">Consolidación de Perfiles</span></div><div class="task-description">Unificación y optimización de roles de usuario</div></div>
-                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="4"><span class="task-title">Implementación de Controles</span></div><div class="task-description">Nuevos mecanismos de seguridad y validación</div></div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="0"><span class="task-title">Tarea 0: Análisis de variables clave y diseño de estructura de reportes.</span></div><div class="task-description">Se realizará un análisis de la base de datos consolidada (PTCI y PTAR 2017–2024) con el objetivo de definir las variables más relevantes para la construcción de reportes institucionales. A partir de ello, se diseñará una estructura base de reportes alineada con las necesidades de seguimiento del SCI, agrupando información por tipo de acción, estatus, institución, sector y temporalidad.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="1"><span class="task-title">Tarea 1: Desarrollo del entorno auxiliar “SICOIN Dashboard”.</span></div><div class="task-description">Se habilitará una aplicación de visualización externa denominada SICOIN Dashboard, que utilizará como fuente la base de datos consolidada. Esta aplicación permitirá cargar, visualizar y validar el funcionamiento de los reportes propuestos, así como presentar un modelo funcional del comportamiento esperado de los futuros reportes en SICOIN.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="2"><span class="task-title">Tarea 2: Construcción de reportes en SICOIN Dashboard.</span></div><div class="task-description">Se desarrollarán en el entorno SICOIN Dashboard los reportes propuestos, con énfasis en la claridad visual, relevancia operativa y utilidad institucional. Los reportes incluirán vistas por entidad, sector, avance de acciones de control, evolución de riesgos y cumplimiento del SCI, entre otros indicadores clave. Cada reporte contará con filtros dinámicos, campos calculados y opciones de exportación.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="3"><span class="task-title">Tarea 3: Validación funcional y retroalimentación interna.</span></div><div class="task-description">Los reportes desarrollados en el Dashboard serán presentados a los usuarios clave del sistema para su validación funcional. A partir de la retroalimentación obtenida, se harán los ajustes necesarios para mejorar su estructura, claridad e interpretación de datos, asegurando su viabilidad para integración en SICOIN.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="3" data-task-id="4"><span class="task-title">Tarea 4: Informe técnico de propuesta de reportes nuevos para SICOIN.</span></div><div class="task-description">Se elaborará un informe técnico con la propuesta final de reportes nuevos a integrar en el SICOIN, incluyendo capturas de pantalla, descripciones técnicas, objetivos de cada reporte, variables utilizadas, reglas de cálculo, filtros aplicables y recomendaciones para su implementación técnica en el sistema. El archivo se titulará “Propuesta de Nuevos Reportes Institucionales para SICOIN”.</div>
+                    </div>
                 </div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                <div class="update-buttons">
-                    <button class="btn btn-primary" data-activity-id="3" data-amount="10">+10% Avance</button>
-                    <button class="btn btn-secondary" data-activity-id="3" data-amount="25">+25% Avance</button>
-                    <button class="btn btn-tertiary" data-activity-id="3" data-action="comment">Añadir Comentario</button>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-date">Día 1</div><div class="timeline-label">Análisis de variables y diseño de estructura de reportes</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 2</div><div class="timeline-label">Construcción de Reportes</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 3</div><div class="timeline-label">Validación Funcional y Retroalimentación</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 4</div><div class="timeline-label">Informe Técnico de Propuesta Final y Power Point Correspondiente</div></div>
+                    <div class="timeline-item"><div class="timeline-date">21 Julio 2025</div><div class="timeline-label">Entrega Final</div></div>
+                </div>
+                <div class="activity-buttons">
+                    <button class="btn btn-primary" onclick="uploadFilePrompt(3)">Cargar Archivo</button>
+                    <button class="btn btn-secondary" onclick="downloadFile(3)">Descargar Avance</button>
+                    <button class="btn btn-tertiary" data-activity-id="3" onclick="addComment(3)">Añadir Comentario</button>
+                </div>
+            </div>
+            <!-- Actividad 4 -->
+            <div class="activity-card" data-activity-id="4">
+                <div class="activity-header">
+                    <h2 class="activity-title">👥 Actividad 4: Gestión y Consolidación de Claves de Usuario del SICOIN</h2>
+                    <select class="status-select" data-activity-id="4">
+                        <option value="Planificado">Planificado</option>
+                        <option value="Iniciado">Iniciado</option>
+                        <option value="Completado">Completado</option>
+                    </select>
+                </div>
+                <div class="activity-description">
+                    <strong>Objetivo:</strong> Consolidar y optimizar la administración de claves de usuario en el sistema SICOIN, mediante una auditoría integral de accesos vigentes, la depuración de claves inválidas, la unificación de perfiles y la implementación de controles de acceso más robustos, en cumplimiento con las disposiciones de seguridad informática institucional.
+                </div>
+                <div class="tasks-grid">
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="4" data-task-id="0"><span class="task-title">Tarea 0: Auditoría de claves activas en el sistema.</span></div><div class="task-description">Se realizará una revisión integral de los usuarios con acceso vigente al SICOIN, identificando el número de claves activas por entidad, tipo de perfil, fechas de última conexión y correspondencia con los titulares o responsables operativos del sistema.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="4" data-task-id="1"><span class="task-title">Tarea 1: Identificación de claves inválidas o inactivas.</span></div><div class="task-description">Se detectarán claves asignadas a usuarios que ya no laboran en las entidades, aquellas que no han sido utilizadas en periodos prolongados o que presentan inconsistencias con el cargo o funciones institucionales asignadas.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="4" data-task-id="2"><span class="task-title">Tarea 2: Proceso de baja controlada de claves no válidas.</span></div><div class="task-description">Se implementará un procedimiento técnico y documentado para dar de baja las claves identificadas como inválidas, asegurando el resguardo de información relacionada y evitando afectaciones a la operación regular del sistema.</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="4" data-task-id="3"><span class="task-title">Tarea 3: Consolidación y homologación de perfiles de usuario.</span></div><div class="task-description">Se llevará a cabo un proceso de revisión y estandarización de los perfiles existentes en SICOIN, agrupando y optimizando los niveles de acceso conforme a las funciones reales desempeñadas por cada tipo de usuario (captura, validación, consulta, administrador, etc.).</div>
+                    </div>
+                    <div class="task-item"><div class="task-checkbox"><input type="checkbox" data-activity-id="4" data-task-id="4"><span class="task-title">Tarea 4: Implementación de nuevos controles de acceso.</span></div><div class="task-description">Se propondrán e implementarán mecanismos adicionales de seguridad institucional, como validación periódica de usuarios activos, revisión semestral de perfiles, doble autenticación, y alertas automáticas para accesos inusuales o no autorizados.</div>
+                    </div>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-date">Día 1</div><div class="timeline-label">Auditoría de claves activas</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 2</div><div class="timeline-label">Identificación de claves inválidas</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 3</div><div class="timeline-label">Proceso de baja controlada</div></div>
+                    <div class="timeline-item"><div class="timeline-date">Día 4</div><div class="timeline-label">Consolidación de perfiles e implementación de controles de acceso</div></div>
+                    <div class="timeline-item"><div class="timeline-date">25 Julio 2025</div><div class="timeline-label">Entrega Final</div></div>
+                </div>
+                <div class="activity-buttons">
+                    <button class="btn btn-primary" onclick="uploadFilePrompt(4)">Cargar Archivo</button>
+                    <button class="btn btn-secondary" onclick="downloadFile(4)">Descargar Avance</button>
+                    <button class="btn btn-tertiary" data-activity-id="4" onclick="addComment(4)">Añadir Comentario</button>
                 </div>
             </div>
         </div>
@@ -675,59 +911,95 @@
 
     <div id="notification" class="notification"></div>
 
+    <!-- Modal para Comentarios -->
+    <div id="commentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('commentModal')">&times;</span>
+            <h3>Añadir Comentario</h3>
+            <textarea id="commentText" placeholder="Escribe tu comentario aquí..."></textarea>
+            <button class="btn btn-primary" id="saveCommentBtn">Guardar Comentario</button>
+            <div class="comments-section" id="commentsList">
+                <h4>Comentarios Anteriores:</h4>
+                <!-- Los comentarios se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Carga de Archivos -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('uploadModal')">&times;</span>
+            <h3>Cargar Archivo de Avance</h3>
+            <input type="password" id="uploadPassword" placeholder="Contraseña">
+            <input type="file" id="fileInput">
+            <button class="btn btn-primary" id="confirmUploadBtn">Confirmar Carga</button>
+        </div>
+    </div>
+
+    <!-- Modal para Descarga de Archivos -->
+    <div id="downloadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('downloadModal')">&times;</span>
+            <h3>Archivos de Avance</h3>
+            <div class="file-list" id="filesList">
+                <!-- Los archivos se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+
     <!-- SCRIPT DE FIREBASE -->
     <script type="module">
       // --- 1. INICIALIZACIÓN DE FIREBASE ---
       // Importamos las funciones necesarias de los SDK de Firebase.
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-      import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+      import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
       import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+      import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-storage.js";
 
       // --- CONFIGURACIÓN DE FIREBASE ---
       // Esta es la configuración de tu proyecto de Firebase.
       const firebaseConfig = {
-        apiKey: "AIzaSyAPKvpV6pf8twwIwSSKzoQSgi4X1MRQpjc",
-        authDomain: "cronograma-sicoin-11bc5.firebaseapp.com",
-        projectId: "cronograma-sicoin-11bc5",
-        storageBucket: "cronograma-sicoin-11bc5.firebasestorage.app",
-        messagingSenderId: "753321413341",
-        appId: "1:753321413341:web:6cbcabcb9345f6c4f02934"
+        apiKey: typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config).apiKey : "YOUR_FIREBASE_API_KEY", // Usar __firebase_config si está disponible
+        authDomain: typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config).authDomain : "YOUR_FIREBASE_AUTH_DOMAIN",
+        projectId: typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config).projectId : "YOUR_FIREBASE_PROJECT_ID",
+        storageBucket: typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config).storageBucket : "YOUR_FIREBASE_STORAGE_BUCKET",
+        messagingSenderId: typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config).messagingSenderId : "YOUR_FIREBASE_MESSAGING_SENDER_ID",
+        appId: typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config).appId : "YOUR_FIREBASE_APP_ID"
       };
 
       // Define un ID único para tu aplicación basado en el projectId de Firebase.
-      const appId = firebaseConfig.projectId;
+      const appId = typeof __app_id !== 'undefined' ? __app_id : firebaseConfig.projectId;
       console.log("App ID utilizada para Firestore:", appId); // Para depuración
 
       // Validar que la configuración de Firebase tenga una API Key
-      if (!firebaseConfig || !firebaseConfig.apiKey) {
-          console.error("Firebase Error: La clave API no está definida en la configuración de Firebase.");
+      if (!firebaseConfig || !firebaseConfig.apiKey || firebaseConfig.apiKey === "YOUR_FIREBASE_API_KEY") {
+          console.error("Firebase Error: La clave API no está definida en la configuración de Firebase o es un placeholder.");
           mostrarNotificacion("Error: Clave API de Firebase no configurada. Consulta la consola.", "error");
-          // No lanzamos un error que detenga la ejecución, solo mostramos una notificación.
       }
 
       // Inicializamos la aplicación de Firebase.
       const app = initializeApp(firebaseConfig);
-      // Obtenemos las instancias de Autenticación y Firestore.
+      // Obtenemos las instancias de Autenticación, Firestore y Storage.
       const auth = getAuth(app);
       const db = getFirestore(app);
+      const storage = getStorage(app);
 
       // --- 2. ESTADO GLOBAL Y REFERENCIA A FIRESTORE ---
       // Referencia al documento único que almacenará todo el estado del cronograma.
-      // La ruta sigue la estructura para datos públicos:
-      // /artifacts/{appId}/public/data/{nombre_coleccion}/{nombre_documento}
       const progressDocRef = doc(db, "artifacts", appId, "public", "data", "Avance", "estadoCronograma");
 
       // Objeto que mantendrá el estado actual del progreso en la memoria del navegador.
-      // Este es el estado inicial si no hay nada guardado en Firestore.
       let cronogramaState = {
           actividades: {
-              '1': { progreso: 0, tareas: [false, false, false, false, false, false, false] },
-              '2': { progreso: 0, tareas: [false, false, false, false, false, false] },
-              '3': { progreso: 0, tareas: [false, false, false, false, false] }
+              '1': { progreso: 0, tareas: [false, false, false, false, false], status: 'Planificado', comments: [], files: [] }, // files is now an array
+              '2': { progreso: 0, tareas: [false, false, false, false, false], status: 'Planificado', comments: [], files: [] },
+              '3': { progreso: 0, tareas: [false, false, false, false, false], status: 'Planificado', comments: [], files: [] },
+              '4': { progreso: 0, tareas: [false, false, false, false, false], status: 'Planificado', comments: [], files: [] }
           }
       };
       
       let isSaving = false; // Flag para evitar guardados múltiples simultáneos
+      let currentActivityId = null; // Used for comments and files
 
       // --- 3. AUTENTICACIÓN Y CARGA DE DATOS ---
       // onAuthStateChanged se ejecuta cuando el usuario inicia sesión o la página se carga.
@@ -742,7 +1014,19 @@
             if (docSnap.exists()) {
               // Si el documento existe, actualizamos nuestro estado local.
               console.log("Datos cargados desde Firestore:", docSnap.data());
-              cronogramaState = docSnap.data();
+              const loadedState = docSnap.data();
+              // Merge loaded state with default to ensure all new fields are present
+              for (const activityId in cronogramaState.actividades) {
+                  if (loadedState.actividades[activityId]) {
+                      // Ensure comments and files are initialized as objects/arrays if they don't exist in loadedState
+                      cronogramaState.actividades[activityId] = {
+                          ...cronogramaState.actividades[activityId],
+                          ...loadedState.actividades[activityId],
+                          comments: loadedState.actividades[activityId].comments || [], // Ensure comments is an array
+                          files: loadedState.actividades[activityId].files || [] // Ensure files is an array
+                      };
+                  }
+              }
             } else {
               // Si no existe, lo creamos con el estado inicial.
               console.log("No se encontró documento en Firestore. Creando uno nuevo.");
@@ -761,7 +1045,12 @@
           // Si no hay usuario, intentamos iniciar sesión anónimamente.
           console.log("Intentando iniciar sesión anónimamente...");
           try {
-              await signInAnonymously(auth);
+              if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                  // Only call signInWithCustomToken if the token is actually provided
+                  await signInWithCustomToken(auth, __initial_auth_token);
+              } else {
+                  await signInAnonymously(auth);
+              }
               console.log("Sesión iniciada anónimamente.");
           } catch (error) {
               console.error("Error en el inicio de sesión anónima:", error);
@@ -797,7 +1086,7 @@
       }
 
       /**
-       * Actualiza la interfaz de usuario (barras, círculos, checkboxes)
+       * Actualiza la interfaz de usuario (barras, círculos, checkboxes, estados)
        * para que refleje el estado actual de `cronogramaState`.
        */
       function actualizarUICompleta() {
@@ -816,6 +1105,12 @@
                           checkboxes[index].checked = estado;
                       }
                   });
+                  // Actualizar estado de la actividad
+                  const statusSelect = activityCard.querySelector('.status-select');
+                  if (statusSelect) {
+                      statusSelect.value = actividad.status;
+                      statusSelect.className = `status-select status-${actividad.status.toLowerCase()}`;
+                  }
               }
 
               // Actualizar círculo de progreso en la vista general
@@ -823,7 +1118,6 @@
               if (progressCard) {
                   const circle = progressCard.querySelector('.progress');
                   const text = progressCard.querySelector('.progress-text');
-                  // Asegurarse de que circle no sea null antes de acceder a r.baseVal.value
                   if (circle) {
                     const radius = circle.r.baseVal.value;
                     const circumference = 2 * Math.PI * radius;
@@ -839,7 +1133,7 @@
       /**
        * Se llama cuando se hace clic en un checkbox de una tarea.
        * @param {HTMLInputElement} checkbox - El elemento checkbox que se cambió.
-       * @param {number} activityId - El ID de la actividad (1, 2, o 3).
+       * @param {string} activityId - El ID de la actividad (1, 2, 3, 4).
        * @param {number} taskId - El índice de la tarea (empezando en 0).
        */
       function updateTask(checkbox, activityId, taskId) {
@@ -858,18 +1152,12 @@
       }
 
       /**
-       * Se llama al presionar los botones de "+10% Avance" o "+25% Avance".
-       * @param {number} activityId - El ID de la actividad.
-       * @param {number} amount - La cantidad de progreso a añadir.
+       * Se llama al cambiar el estado de una actividad.
+       * @param {string} activityId - El ID de la actividad.
+       * @param {string} newStatus - El nuevo estado ('Planificado', 'Iniciado', 'Completado').
        */
-      function updateProgress(activityId, amount) {
-          let progresoActual = cronogramaState.actividades[activityId].progreso;
-          progresoActual += amount;
-          if (progresoActual > 100) progresoActual = 100; // No pasar del 100%
-          
-          cronogramaState.actividades[activityId].progreso = progresoActual;
-
-          // Actualizamos la UI y guardamos.
+      function updateActivityStatus(activityId, newStatus) {
+          cronogramaState.actividades[activityId].status = newStatus;
           actualizarUICompleta();
           guardarProgreso();
       }
@@ -888,11 +1176,160 @@
           }, 3000); // La notificación desaparece después de 3 segundos.
       }
 
-      // Funciones placeholder que no interactúan con Firebase pero evitan errores.
-      function addComment(activityId) {
-          // En lugar de alert(), se podría implementar un modal personalizado.
-          mostrarNotificacion(`Función de comentario para Actividad ${activityId} no implementada.`, "info");
+      /**
+       * Abre un modal.
+       * @param {string} modalId - El ID del modal a abrir.
+       */
+      function openModal(modalId) {
+          document.getElementById(modalId).style.display = 'flex';
       }
+
+      /**
+       * Cierra un modal.
+       * @param {string} modalId - El ID del modal a cerrar.
+       */
+      function closeModal(modalId) {
+          document.getElementById(modalId).style.display = 'none';
+      }
+
+      /**
+       * Abre el modal de comentarios y carga los comentarios existentes para la actividad.
+       * @param {string} activityId - El ID de la actividad.
+       */
+      async function addComment(activityId) {
+          currentActivityId = activityId;
+          openModal('commentModal');
+          displayComments(activityId);
+      }
+
+      /**
+       * Muestra los comentarios para una actividad específica.
+       * @param {string} activityId - El ID de la actividad.
+       */
+      function displayComments(activityId) {
+          const commentsListDiv = document.getElementById('commentsList');
+          commentsListDiv.innerHTML = '<h4>Comentarios Anteriores:</h4>'; // Clear previous comments
+          const comments = cronogramaState.actividades[activityId].comments || [];
+          if (comments.length === 0) {
+              commentsListDiv.innerHTML += '<p>No hay comentarios.</p>';
+          } else {
+              comments.forEach(comment => {
+                  const commentItem = document.createElement('div');
+                  commentItem.className = 'comment-item';
+                  commentItem.innerHTML = `<strong>${comment.timestamp}:</strong> ${comment.text}`;
+                  commentsListDiv.appendChild(commentItem);
+              });
+          }
+      }
+
+      /**
+       * Guarda un comentario en Firestore.
+       */
+      document.getElementById('saveCommentBtn').addEventListener('click', () => {
+          const commentText = document.getElementById('commentText').value;
+          if (commentText.trim() === "") {
+              mostrarNotificacion("El comentario no puede estar vacío.", "error");
+              return;
+          }
+          const timestamp = new Date().toLocaleString();
+          if (!cronogramaState.actividades[currentActivityId].comments) {
+              cronogramaState.actividades[currentActivityId].comments = [];
+          }
+          cronogramaState.actividades[currentActivityId].comments.push({ text: commentText, timestamp: timestamp });
+          document.getElementById('commentText').value = ''; // Clear textarea
+          guardarProgreso();
+          displayComments(currentActivityId); // Refresh comments in modal
+          mostrarNotificacion("Comentario guardado.", "success");
+      });
+
+      /**
+       * Abre el modal de carga de archivos y establece la actividad actual.
+       * @param {string} activityId - El ID de la actividad.
+       */
+      function uploadFilePrompt(activityId) {
+          currentActivityId = activityId;
+          document.getElementById('uploadPassword').value = ''; // Clear password field
+          document.getElementById('fileInput').value = ''; // Clear file input
+          openModal('uploadModal');
+      }
+
+      /**
+       * Confirma la carga del archivo después de verificar la contraseña.
+       */
+      document.getElementById('confirmUploadBtn').addEventListener('click', async () => {
+          const password = document.getElementById('uploadPassword').value;
+          const fileInput = document.getElementById('fileInput');
+          const file = fileInput.files[0];
+
+          if (password !== "admin") {
+              mostrarNotificacion("Contraseña incorrecta.", "error");
+              return;
+          }
+          if (!file) {
+              mostrarNotificacion("Por favor, selecciona un archivo.", "error");
+              return;
+          }
+
+          try {
+              // Files are now stored at activity level, not task level
+              const storageRef = ref(storage, `artifacts/${appId}/public/data/files/activity-${currentActivityId}/${file.name}`);
+              await uploadBytes(storageRef, file);
+              const fileURL = await getDownloadURL(storageRef);
+
+              if (!cronogramaState.actividades[currentActivityId].files) {
+                  cronogramaState.actividades[currentActivityId].files = [];
+              }
+              // Store file data in the activity's files array
+              cronogramaState.actividades[currentActivityId].files.push({
+                  name: file.name,
+                  url: fileURL,
+                  timestamp: new Date().toLocaleString()
+              });
+              guardarProgreso();
+              mostrarNotificacion("Archivo cargado exitosamente.", "success");
+              closeModal('uploadModal');
+          } catch (error) {
+              console.error("Error al cargar el archivo:", error);
+              mostrarNotificacion(`Error al cargar el archivo: ${error.message}`, "error");
+          }
+      });
+
+      /**
+       * Abre el modal de descarga de archivos y lista los archivos disponibles para la actividad.
+       * @param {string} activityId - El ID de la actividad.
+       */
+      async function downloadFile(activityId) {
+          currentActivityId = activityId;
+          openModal('downloadModal');
+          displayFilesForDownload(activityId);
+      }
+
+      /**
+       * Muestra los archivos disponibles para descargar en el modal.
+       * @param {string} activityId - El ID de la actividad.
+       */
+      function displayFilesForDownload(activityId) {
+          const filesListDiv = document.getElementById('filesList');
+          filesListDiv.innerHTML = ''; // Clear previous files
+          const files = cronogramaState.actividades[activityId].files || [];
+          if (files.length === 0) {
+              filesListDiv.innerHTML += '<p>No hay archivos para descargar en esta actividad.</p>';
+          } else {
+              files.forEach(file => {
+                  const fileLink = document.createElement('a');
+                  fileLink.href = file.url;
+                  fileLink.target = '_blank'; // Open in new tab
+                  fileLink.textContent = `${file.name} (${file.timestamp})`;
+                  filesListDiv.appendChild(fileLink);
+              });
+          }
+      }
+
+      // Hacer las funciones globales para que puedan ser llamadas desde el HTML
+      window.addComment = addComment;
+      window.uploadFilePrompt = uploadFilePrompt;
+      window.downloadFile = downloadFile;
+      window.closeModal = closeModal;
 
       // --- 5. ADICIÓN DE LISTENERS DE EVENTOS DESPUÉS DE CARGAR EL DOM ---
       document.addEventListener('DOMContentLoaded', () => {
@@ -905,20 +1342,12 @@
               });
           });
 
-          // Adjuntar listeners para los botones de avance
-          document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
-              button.addEventListener('click', (event) => {
+          // Adjuntar listeners para los select de estado de actividad
+          document.querySelectorAll('.status-select').forEach(select => {
+              select.addEventListener('change', (event) => {
                   const activityId = event.target.dataset.activityId;
-                  const amount = parseInt(event.target.dataset.amount);
-                  updateProgress(activityId, amount);
-              });
-          });
-
-          // Adjuntar listeners para los botones de comentario
-          document.querySelectorAll('.btn-tertiary').forEach(button => {
-              button.addEventListener('click', (event) => {
-                  const activityId = event.target.dataset.activityId;
-                  addComment(activityId);
+                  const newStatus = event.target.value;
+                  updateActivityStatus(activityId, newStatus);
               });
           });
       });
